@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="zh-CN" class="scroll-smooth">
+<html lang="zh-TW" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>銘佳緣分 - 尋找您的完美另一半</title>
+    <title id="page-title">銘佳緣分 - 尋找您的完美另一半</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts (Plus Jakarta Sans & Noto Sans SC) -->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+Thai:wght@400;500;700&family=Padauk:wght@400;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <!-- FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
@@ -15,7 +15,7 @@
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Plus Jakarta Sans', 'Noto Sans SC', 'sans-serif'],
+                        sans: ['Plus Jakarta Sans', 'Noto Sans SC', 'Noto Sans JP', 'Noto Sans Thai', 'Padauk', 'sans-serif'],
                         english: ['Plus Jakarta Sans', 'sans-serif'],
                     },
                     colors: {
@@ -28,13 +28,12 @@
     </script>
     <style>
         body {
-            font-family: 'Plus Jakarta Sans', 'Noto Sans SC', sans-serif;
+            font-family: 'Plus Jakarta Sans', 'Noto Sans SC', 'Noto Sans JP', 'Noto Sans Thai', 'Padauk', sans-serif;
             color: #f3f4f6;
             overflow-x: hidden;
             background-color: #05070f;
         }
 
-        /* Scrolling Background Collage Animation */
         .bg-collage-container {
             position: fixed;
             top: 0;
@@ -124,32 +123,40 @@
 </head>
 <body class="text-gray-100 min-h-screen selection:bg-brandPink selection:text-white">
 
-    <!-- Background Scrolling Photo Collage (Randomized via JS) -->
+    <!-- Background Scrolling Photo Collage -->
     <div class="bg-collage-container" id="bg-collage-wrapper">
-        <!-- Column 1: Scrolls Up -->
         <div class="collage-column scroll-up" id="col-1"></div>
-        <!-- Column 2: Scrolls Down -->
         <div class="collage-column scroll-down hidden sm:flex" id="col-2"></div>
-        <!-- Column 3: Scrolls Up -->
         <div class="collage-column scroll-up hidden md:flex" id="col-3"></div>
     </div>
 
     <!-- Header / Nav -->
-    <header class="fixed top-0 left-0 right-0 z-50 glass-panel border-b border-white/10 px-6 py-4">
+    <header class="fixed top-0 left-0 right-0 z-50 glass-panel border-b border-white/10 px-4 sm:px-6 py-3">
         <div class="max-w-6xl mx-auto flex justify-between items-center">
             <div class="flex items-center space-x-3">
-                <!-- Graphic T Logo -->
                 <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-brandPink via-purple-600 to-indigo-500 flex items-center justify-center neon-glow relative overflow-hidden shadow-lg border border-white/20">
                     <div class="absolute inset-0 bg-white/10 backdrop-blur-sm"></div>
                     <span class="relative font-black text-white text-xl tracking-tighter drop-shadow-md flex items-center">
                         T<span class="text-[10px] text-pink-300 absolute -top-1 -right-2">♥</span>
                     </span>
                 </div>
-                <span class="text-xl font-extrabold tracking-tight bg-gradient-to-r from-pink-400 via-purple-300 to-indigo-400 bg-clip-text text-transparent">銘佳緣分</span>
+                <span data-i18n="brand_name" class="text-lg sm:text-xl font-extrabold tracking-tight bg-gradient-to-r from-pink-400 via-purple-300 to-indigo-400 bg-clip-text text-transparent">銘佳緣分</span>
             </div>
-            <div class="flex items-center space-x-4">
-                <a href="#testimonials" class="hidden sm:inline-block text-sm font-medium text-gray-300 hover:text-white transition">成功故事</a>
-                <a href="#profiles" class="px-5 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-sm font-semibold transition border border-white/10 shadow-lg">
+
+            <div class="flex items-center space-x-2 sm:space-x-4">
+                <!-- Language Switcher Dropdown -->
+                <div class="relative flex items-center">
+                    <i class="fa-solid fa-globe text-gray-300 text-xs sm:text-sm mr-1.5 hidden sm:inline"></i>
+                    <select id="language-switcher" onchange="switchLanguage(this.value)" class="bg-gray-900/80 text-white text-xs font-semibold px-2 py-1.5 rounded-xl border border-white/20 focus:outline-none focus:border-brandPink cursor-pointer">
+                        <option value="zh-TW">繁體中文</option>
+                        <option value="th">ภาษาไทย (Thailand)</option>
+                        <option value="ja">日本語 (Japan)</option>
+                        <option value="my">မြန်မာ (Myanmar)</option>
+                    </select>
+                </div>
+
+                <a href="#testimonials" data-i18n="nav_stories" class="hidden md:inline-block text-sm font-medium text-gray-300 hover:text-white transition">成功故事</a>
+                <a href="#profiles" data-i18n="nav_explore" class="px-3 sm:px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs sm:text-sm font-semibold transition border border-white/10 shadow-lg whitespace-nowrap">
                     探索檔案
                 </a>
             </div>
@@ -164,19 +171,19 @@
         <div class="max-w-4xl mx-auto text-center relative z-10">
             <div class="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-black/40 border border-white/15 mb-6 text-sm text-pink-300 backdrop-blur-md shadow-xl">
                 <span class="w-2.5 h-2.5 rounded-full bg-green-400 animate-pulse"></span>
-                <span class="font-semibold tracking-wide">100+ 位認證用戶正在附近線上</span>
+                <span data-i18n="hero_badge" class="font-semibold tracking-wide">100+ 位認證用戶正在附近線上</span>
             </div>
-            <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6 leading-[1.1] text-white drop-shadow-md">
-                今天就來尋找您的 <span class="bg-gradient-to-r from-brandPink via-purple-400 to-pink-300 bg-clip-text text-transparent">完美伴侶</span>
+            <h1 class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6 leading-[1.2] text-white drop-shadow-md">
+                <span data-i18n="hero_title_1">今天就來尋找您的</span> <span data-i18n="hero_title_highlight" class="bg-gradient-to-r from-brandPink via-purple-400 to-pink-300 bg-clip-text text-transparent">完美伴侶</span>
             </h1>
-            <p class="text-lg md:text-xl text-gray-200 mb-10 max-w-2xl mx-auto font-normal leading-relaxed drop-shadow">
+            <p data-i18n="hero_subtitle" class="text-base sm:text-lg md:text-xl text-gray-200 mb-10 max-w-2xl mx-auto font-normal leading-relaxed drop-shadow">
                 透過我們的互動式配對問卷，立即解鎖您附近優質女孩的專屬直接聯絡方式與線上聊天體驗。
             </p>
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="#survey-section" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-brandPink to-purple-600 text-white font-extrabold text-lg hover:scale-105 transition duration-300 neon-glow text-center shadow-xl">
-                    開始配對測驗 <i class="fa-solid fa-arrow-down ml-2"></i>
+                <a href="#survey-section" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-brandPink to-purple-600 text-white font-extrabold text-base sm:text-lg hover:scale-105 transition duration-300 neon-glow text-center shadow-xl">
+                    <span data-i18n="hero_cta_quiz">開始配對測驗</span> <i class="fa-solid fa-arrow-down ml-2"></i>
                 </a>
-                <a href="#profiles" class="w-full sm:w-auto px-8 py-4 rounded-2xl glass-card text-white font-semibold text-lg hover:bg-white/15 transition duration-300 text-center shadow-lg">
+                <a href="#profiles" data-i18n="hero_cta_explore" class="w-full sm:w-auto px-8 py-4 rounded-2xl glass-card text-white font-semibold text-base sm:text-lg hover:bg-white/15 transition duration-300 text-center shadow-lg">
                     查看推薦檔案
                 </a>
             </div>
@@ -186,16 +193,16 @@
     <!-- Profiles Showcase Section -->
     <section id="profiles" class="py-24 px-6 max-w-6xl mx-auto">
         <div class="text-center mb-16">
-            <span class="text-xs font-bold uppercase tracking-widest text-pink-400 bg-pink-500/15 px-3.5 py-1.5 rounded-full border border-pink-500/30">Featured Profiles</span>
-            <h2 class="text-3xl md:text-4xl font-extrabold mt-4 text-white">附近精選推薦</h2>
-            <p class="text-gray-300 max-w-lg mx-auto mt-2">根據您當前區域喜好，為您挑選最契合的優質檔案。</p>
+            <span data-i18n="profiles_badge" class="text-xs font-bold uppercase tracking-widest text-pink-400 bg-pink-500/15 px-3.5 py-1.5 rounded-full border border-pink-500/30">FEATURED PROFILES</span>
+            <h2 data-i18n="profiles_title" class="text-3xl md:text-4xl font-extrabold mt-4 text-white">附近精選推薦</h2>
+            <p data-i18n="profiles_desc" class="text-gray-300 max-w-lg mx-auto mt-2">根據您當前區域喜好，為您挑選最契合的優質檔案。</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <!-- Profile 1 -->
             <div class="glass-card rounded-3xl overflow-hidden group hover:border-brandPink/60 transition duration-300 animate-float shadow-2xl">
                 <div class="relative h-80 overflow-hidden">
-                    <img src="https://i.ibb.co/M5hGcfCH/photo-2026-05-29-09-47-30.jpg" alt="林詩涵" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                    <img src="https://i.ibb.co/M5hGcfCH/photo-2026-05-29-09-47-30.jpg" alt="Profile 1" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-[#070913] via-transparent to-transparent opacity-85"></div>
                     <div class="absolute top-4 right-4 bg-black/70 backdrop-blur-md px-3 py-1.5 rounded-full text-xs font-semibold text-green-400 flex items-center space-x-1.5 border border-white/15 shadow-md">
                         <span class="w-2 h-2 rounded-full bg-green-400 animate-ping"></span>
@@ -204,13 +211,13 @@
                 </div>
                 <div class="p-6 -mt-12 relative z-10">
                     <div class="flex justify-between items-center mb-2">
-                        <h3 class="text-2xl font-bold text-white">林詩涵，23</h3>
-                        <span class="text-xs px-3 py-1 rounded-full bg-pink-500/25 text-pink-300 border border-pink-500/40 font-semibold shadow-inner">VIP 推薦</span>
+                        <h3 class="text-2xl font-bold text-white"><span data-i18n="p1_name">林詩涵</span>，23</h3>
+                        <span data-i18n="p1_badge" class="text-xs px-3 py-1 rounded-full bg-pink-500/25 text-pink-300 border border-pink-500/40 font-semibold shadow-inner">VIP 推薦</span>
                     </div>
-                    <p class="text-gray-200 text-sm mb-4 leading-relaxed font-normal">喜歡咖啡與旅行，期待能遇到聊得來的真誠另一半。</p>
+                    <p data-i18n="p1_bio" class="text-gray-200 text-sm mb-4 leading-relaxed font-normal">喜歡咖啡與旅行，期待能遇到聊得來的真誠另一半。</p>
                     <div class="flex items-center text-xs text-gray-300 space-x-4 pt-2 border-t border-white/15">
                         <span><i class="fa-solid fa-location-dot text-brandPink mr-1"></i> <span class="city-label font-english">Yangon</span></span>
-                        <span><i class="fa-solid fa-heart text-red-500 mr-1"></i> 契合度 95%</span>
+                        <span><i class="fa-solid fa-heart text-red-500 mr-1"></i> <span data-i18n="match_label">契合度</span> 95%</span>
                     </div>
                 </div>
             </div>
@@ -218,7 +225,7 @@
             <!-- Profile 2 -->
             <div class="glass-card rounded-3xl overflow-hidden group hover:border-brandPink/60 transition duration-300 animate-float shadow-2xl" style="animation-delay: 1.2s;">
                 <div class="relative h-80 overflow-hidden">
-                    <img src="https://i.ibb.co/KcrJDhJk/photo-2026-10-02-19-19-37.jpg" alt="陳雨桐" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                    <img src="https://i.ibb.co/KcrJDhJk/photo-2026-10-02-19-19-37.jpg" alt="Profile 2" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-[#070913] via-transparent to-transparent opacity-85"></div>
                     <div class="absolute top-4 right-4 bg-black/70 backdrop-blur-md px-3 py-1.5 rounded-full text-xs font-semibold text-green-400 flex items-center space-x-1.5 border border-white/15 shadow-md">
                         <span class="w-2 h-2 rounded-full bg-green-400"></span>
@@ -227,13 +234,13 @@
                 </div>
                 <div class="p-6 -mt-12 relative z-10">
                     <div class="flex justify-between items-center mb-2">
-                        <h3 class="text-2xl font-bold text-white">陳雨桐，21</h3>
-                        <span class="text-xs px-3 py-1 rounded-full bg-purple-500/25 text-purple-300 border border-purple-500/40 font-semibold shadow-inner">火熱線上</span>
+                        <h3 class="text-2xl font-bold text-white"><span data-i18n="p2_name">陳雨桐</span>，21</h3>
+                        <span data-i18n="p2_badge" class="text-xs px-3 py-1 rounded-full bg-purple-500/25 text-purple-300 border border-purple-500/40 font-semibold shadow-inner">火熱線上</span>
                     </div>
-                    <p class="text-gray-200 text-sm mb-4 leading-relaxed font-normal">熱愛閱讀、獨立音樂與藝術展覽，尋找志同道合的朋友。</p>
+                    <p data-i18n="p2_bio" class="text-gray-200 text-sm mb-4 leading-relaxed font-normal">熱愛閱讀、獨立音樂與藝術展覽，尋找志同道合的朋友。</p>
                     <div class="flex items-center text-xs text-gray-300 space-x-4 pt-2 border-t border-white/15">
                         <span><i class="fa-solid fa-location-dot text-brandPink mr-1"></i> <span class="city-label font-english">Yangon</span></span>
-                        <span><i class="fa-solid fa-heart text-red-500 mr-1"></i> 契合度 88%</span>
+                        <span><i class="fa-solid fa-heart text-red-500 mr-1"></i> <span data-i18n="match_label">契合度</span> 88%</span>
                     </div>
                 </div>
             </div>
@@ -241,7 +248,7 @@
             <!-- Profile 3 -->
             <div class="glass-card rounded-3xl overflow-hidden group hover:border-brandPink/60 transition duration-300 animate-float shadow-2xl" style="animation-delay: 2.4s;">
                 <div class="relative h-80 overflow-hidden">
-                    <img src="https://i.ibb.co/G3fL4GDm/photo-2026-08-02-19-46-04.jpg" alt="張雅婷" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                    <img src="https://i.ibb.co/G3fL4GDm/photo-2026-08-02-19-46-04.jpg" alt="Profile 3" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-[#070913] via-transparent to-transparent opacity-85"></div>
                     <div class="absolute top-4 right-4 bg-black/70 backdrop-blur-md px-3 py-1.5 rounded-full text-xs font-semibold text-green-400 flex items-center space-x-1.5 border border-white/15 shadow-md">
                         <span class="w-2 h-2 rounded-full bg-green-400"></span>
@@ -250,13 +257,13 @@
                 </div>
                 <div class="p-6 -mt-12 relative z-10">
                     <div class="flex justify-between items-center mb-2">
-                        <h3 class="text-2xl font-bold text-white">張雅婷，24</h3>
-                        <span class="text-xs px-3 py-1 rounded-full bg-blue-500/25 text-blue-300 border border-blue-500/40 font-semibold shadow-inner">已認證</span>
+                        <h3 class="text-2xl font-bold text-white"><span data-i18n="p3_name">張雅婷</span>，24</h3>
+                        <span data-i18n="p3_badge" class="text-xs px-3 py-1 rounded-full bg-blue-500/25 text-blue-300 border border-blue-500/40 font-semibold shadow-inner">已認證</span>
                     </div>
-                    <p class="text-gray-200 text-sm mb-4 leading-relaxed font-normal">喜歡攝影、週末健行與探索各地美食的美食家。</p>
+                    <p data-i18n="p3_bio" class="text-gray-200 text-sm mb-4 leading-relaxed font-normal">喜歡攝影、週末健行與探索各地美食的美食家。</p>
                     <div class="flex items-center text-xs text-gray-300 space-x-4 pt-2 border-t border-white/15">
                         <span><i class="fa-solid fa-location-dot text-brandPink mr-1"></i> <span class="city-label font-english">Yangon</span></span>
-                        <span><i class="fa-solid fa-heart text-red-500 mr-1"></i> 契合度 92%</span>
+                        <span><i class="fa-solid fa-heart text-red-500 mr-1"></i> <span data-i18n="match_label">契合度</span> 92%</span>
                     </div>
                 </div>
             </div>
@@ -270,16 +277,15 @@
 
             <!-- Quiz Header -->
             <div class="text-center mb-8">
-                <span class="text-xs font-bold uppercase tracking-widest text-pink-400 bg-pink-500/15 px-3.5 py-1.5 rounded-full border border-pink-500/30">互動式配對測驗</span>
-                <h2 class="text-2xl md:text-3xl font-extrabold mt-4 text-white">解鎖您的最佳伴侶</h2>
-                <p class="text-gray-300 text-sm mt-1">逐步回答問題，解鎖直接聯絡方式與線上聊天</p>
-                <!-- Progress Indicator -->
+                <span data-i18n="quiz_badge" class="text-xs font-bold uppercase tracking-widest text-pink-400 bg-pink-500/15 px-3.5 py-1.5 rounded-full border border-pink-500/30">互動式配對測驗</span>
+                <h2 data-i18n="quiz_title" class="text-2xl md:text-3xl font-extrabold mt-4 text-white">解鎖您的最佳伴侶</h2>
+                <p data-i18n="quiz_desc" class="text-gray-300 text-sm mt-1">逐步回答問題，解鎖直接聯絡方式與線上聊天</p>
                 <div class="w-full bg-white/15 h-2 rounded-full mt-6 overflow-hidden shadow-inner">
                     <div id="quiz-progress" class="bg-gradient-to-r from-brandPink to-purple-500 h-full w-1/3 transition-all duration-500 shadow-lg"></div>
                 </div>
             </div>
 
-            <!-- Loading State Container (5 Seconds Delay Animation) -->
+            <!-- Loading State Container -->
             <div id="quiz-loading" class="hidden py-16 text-center space-y-6">
                 <div class="relative w-20 h-20 mx-auto">
                     <div class="absolute inset-0 rounded-full border-4 border-brandPink/20"></div>
@@ -296,14 +302,14 @@
 
             <!-- Step 1 -->
             <div id="step-1" class="step-transition space-y-6">
-                <h3 class="text-lg font-bold text-white">1. 您理想中的第一次約會活動是什麼？</h3>
+                <h3 data-i18n="q1_title" class="text-lg font-bold text-white">1. 您理想中的第一次約會活動是什麼？</h3>
                 <div class="space-y-3">
                     <button onclick="nextStep(1)" class="w-full text-left glass-card p-4 rounded-2xl flex items-center justify-between hover:border-brandPink transition group shadow-md">
-                        <span class="text-sm font-semibold text-gray-100">溫馨咖啡廳聊天，彼此認識了解</span>
+                        <span data-i18n="q1_opt1" class="text-sm font-semibold text-gray-100">溫馨咖啡廳聊天，彼此認識了解</span>
                         <i class="fa-solid fa-chevron-right text-xs text-gray-400 group-hover:text-brandPink transition"></i>
                     </button>
                     <button onclick="nextStep(1)" class="w-full text-left glass-card p-4 rounded-2xl flex items-center justify-between hover:border-brandPink transition group shadow-md">
-                        <span class="text-sm font-semibold text-gray-100">戶外踏青、爬山或大自然散步</span>
+                        <span data-i18n="q1_opt2" class="text-sm font-semibold text-gray-100">戶外踏青、爬山或大自然散步</span>
                         <i class="fa-solid fa-chevron-right text-xs text-gray-400 group-hover:text-brandPink transition"></i>
                     </button>
                 </div>
@@ -311,14 +317,14 @@
 
             <!-- Step 2 -->
             <div id="step-2" class="step-transition space-y-6 hidden">
-                <h3 class="text-lg font-bold text-white">2. 您比較喜歡哪個年齡層的對象？</h3>
+                <h3 data-i18n="q2_title" class="text-lg font-bold text-white">2. 您比較喜歡哪個年齡層的對象？</h3>
                 <div class="space-y-3">
                     <button onclick="nextStep(2)" class="w-full text-left glass-card p-4 rounded-2xl flex items-center justify-between hover:border-brandPink transition group shadow-md">
-                        <span class="text-sm font-semibold text-gray-100 font-english">18 - 23 歲</span>
+                        <span data-i18n="q2_opt1" class="text-sm font-semibold text-gray-100">18 - 23 歲</span>
                         <i class="fa-solid fa-chevron-right text-xs text-gray-400 group-hover:text-brandPink transition"></i>
                     </button>
                     <button onclick="nextStep(2)" class="w-full text-left glass-card p-4 rounded-2xl flex items-center justify-between hover:border-brandPink transition group shadow-md">
-                        <span class="text-sm font-semibold text-gray-100">24 歲以上</span>
+                        <span data-i18n="q2_opt2" class="text-sm font-semibold text-gray-100">24 歲以上</span>
                         <i class="fa-solid fa-chevron-right text-xs text-gray-400 group-hover:text-brandPink transition"></i>
                     </button>
                 </div>
@@ -326,38 +332,38 @@
 
             <!-- Step 3 -->
             <div id="step-3" class="step-transition space-y-6 hidden">
-                <h3 class="text-lg font-bold text-white">3. 您偏好哪種溝通聊天風格？</h3>
+                <h3 data-i18n="q3_title" class="text-lg font-bold text-white">3. 您偏好哪種溝通聊天風格？</h3>
                 <div class="space-y-3">
                     <button onclick="finishQuiz()" class="w-full text-left glass-card p-4 rounded-2xl flex items-center justify-between hover:border-brandPink transition group shadow-md">
-                        <span class="text-sm font-semibold text-gray-100">友善、活潑且充滿熱情的訊息交流</span>
+                        <span data-i18n="q3_opt1" class="text-sm font-semibold text-gray-100">友善、活潑且充滿熱情的訊息交流</span>
                         <i class="fa-solid fa-sparkles text-xs text-brandPink"></i>
                     </button>
                     <button onclick="finishQuiz()" class="w-full text-left glass-card p-4 rounded-2xl flex items-center justify-between hover:border-brandPink transition group shadow-md">
-                        <span class="text-sm font-semibold text-gray-100">有深度、富含內涵的知性對話</span>
+                        <span data-i18n="q3_opt2" class="text-sm font-semibold text-gray-100">有深度、富含內涵的知性對話</span>
                         <i class="fa-solid fa-sparkles text-xs text-brandPink"></i>
                     </button>
                 </div>
             </div>
 
-            <!-- Reward Result Container (Hidden Initially) -->
-            <div id="reward-container" class="hidden text-center space-y-6 animate-fade-in">
+            <!-- Reward Result Container -->
+            <div id="reward-container" class="hidden text-center space-y-6">
                 <div class="inline-flex w-16 h-16 rounded-full bg-green-500/20 border border-green-500/40 text-green-400 items-center justify-center text-3xl mb-2 neon-glow-blue shadow-lg">
                     <i class="fa-solid fa-check"></i>
                 </div>
                 
-                <!-- VIP Countdown Timer Badge (30 Seconds) -->
+                <!-- VIP Countdown Timer -->
                 <div id="vip-timer-banner" class="inline-flex items-center space-x-2 bg-amber-500/15 border border-amber-500/40 px-4 py-2 rounded-xl text-amber-300 text-xs font-bold animate-pulse shadow-md">
                     <i class="fa-solid fa-clock"></i>
-                    <span>VIP 專屬通道剩餘時間：<span id="countdown" class="font-mono text-sm">00:30</span></span>
+                    <span><span data-i18n="vip_timer_text">VIP 專屬通道剩餘時間：</span><span id="countdown" class="font-mono text-sm ml-1">00:30</span></span>
                 </div>
 
                 <!-- Matched Girl Photo & Info -->
                 <div class="flex flex-col items-center space-y-3">
                     <div class="relative w-28 h-28 rounded-full overflow-hidden border-2 border-brandPink neon-glow shadow-xl">
-                        <img src="https://i.ibb.co/M5hGcfCH/photo-2026-05-29-09-47-30.jpg" alt="林詩涵" class="w-full h-full object-cover">
+                        <img src="https://i.ibb.co/M5hGcfCH/photo-2026-05-29-09-47-30.jpg" alt="Match" class="w-full h-full object-cover">
                     </div>
                     <div>
-                        <h3 class="text-2xl font-extrabold text-white">林詩涵，23 歲</h3>
+                        <h3 class="text-2xl font-extrabold text-white"><span data-i18n="p1_name">林詩涵</span>，23</h3>
                         <p class="text-xs text-pink-300 flex items-center justify-center space-x-1.5 mt-1 font-semibold">
                             <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
                             <span id="match-distance-text" class="font-english">95% Match with you (<span class="city-label">Yangon</span>, 0.8 km away)</span>
@@ -367,72 +373,70 @@
 
                 <!-- Contact Cards -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
-                    <!-- Telegram Card -->
                     <div class="glass-card p-6 rounded-2xl border border-white/10 flex flex-col items-center justify-center space-y-3 group hover:scale-105 hover:border-blue-400/50 transition-all duration-300 shadow-xl">
                         <div class="w-12 h-12 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
                             <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/1280px-Telegram_logo.svg.png" alt="Telegram Logo" class="w-10 h-10 object-contain drop-shadow-md">
                         </div>
-                        <h4 class="font-bold text-white text-base">Telegram 帳號</h4>
+                        <h4 data-i18n="contact_tg_title" class="font-bold text-white text-base">Telegram 帳號</h4>
                         <span class="text-pink-400 font-mono text-sm bg-pink-500/15 px-3 py-1 rounded-full border border-pink-500/30">@shihan_99</span>
-                        <p class="text-xs text-gray-300 text-center">直接傳送訊息打招呼</p>
+                        <p data-i18n="contact_tg_sub" class="text-xs text-gray-300 text-center">直接傳送訊息打招呼</p>
                     </div>
 
-                    <!-- WeChat Card -->
                     <div class="glass-card p-6 rounded-2xl border border-white/10 flex flex-col items-center justify-center space-y-3 group hover:scale-105 hover:border-green-400/50 transition-all duration-300 shadow-xl">
                         <div class="w-12 h-12 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
                             <img src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/wechat-app-icon.png" alt="WeChat Logo" class="w-10 h-10 object-contain drop-shadow-md">
                         </div>
-                        <h4 class="font-bold text-white text-base">微信 (WeChat)</h4>
+                        <h4 data-i18n="contact_wc_title" class="font-bold text-white text-base">微信 (WeChat)</h4>
                         <span class="text-pink-400 font-mono text-sm bg-pink-500/15 px-3 py-1 rounded-full border border-pink-500/30">shihan_match22</span>
-                        <p class="text-xs text-gray-300 text-center">新增好友開始聊天</p>
+                        <p data-i18n="contact_wc_sub" class="text-xs text-gray-300 text-center">新增好友開始聊天</p>
                     </div>
                 </div>
 
-                <!-- Live Mock Chat Simulator Feature (Limited to 4 messages) -->
+                <!-- Live Mock Chat Simulator -->
                 <div class="mt-8 glass-card rounded-2xl border border-white/15 p-4 text-left shadow-2xl">
                     <div class="flex items-center justify-between pb-3 border-b border-white/15 mb-3">
                         <div class="flex items-center space-x-2">
-                            <img src="https://i.ibb.co/M5hGcfCH/photo-2026-05-29-09-47-30.jpg" alt="詩涵" class="w-8 h-8 rounded-full object-cover">
+                            <img src="https://i.ibb.co/M5hGcfCH/photo-2026-05-29-09-47-30.jpg" alt="Avatar" class="w-8 h-8 rounded-full object-cover">
                             <div>
-                                <h5 class="text-sm font-bold text-white">林詩涵</h5>
-                                <span class="text-[10px] text-green-400 flex items-center font-semibold"><span class="w-1.5 h-1.5 rounded-full bg-green-400 mr-1"></span> 線上中</span>
+                                <h5 data-i18n="p1_name" class="text-sm font-bold text-white">林詩涵</h5>
+                                <span class="text-[10px] text-green-400 flex items-center font-semibold"><span class="w-1.5 h-1.5 rounded-full bg-green-400 mr-1"></span> <span data-i18n="chat_online">線上中</span></span>
                             </div>
                         </div>
                         <span id="msg-limit-badge" class="text-[10px] bg-pink-500/25 text-pink-200 px-2.5 py-0.5 rounded-full font-bold">試用聊天（剩餘 4 則）</span>
                     </div>
                     <div id="chat-messages" class="h-40 overflow-y-auto custom-scrollbar space-y-2.5 pr-2 mb-3 text-xs">
-                        <div class="bg-white/15 p-3 rounded-xl rounded-tl-none max-w-[85%] text-gray-100 font-medium">
+                        <div id="chat-initial-bubble" class="bg-white/15 p-3 rounded-xl rounded-tl-none max-w-[85%] text-gray-100 font-medium">
                             嗨！很高興透過測驗和您配對成功！😊 今天過得怎麼樣呀？
                         </div>
                     </div>
                     <div id="chat-input-area" class="flex items-center space-x-2">
-                        <input type="text" id="chat-input" placeholder="傳送訊息給詩涵（最多 4 則）..." class="flex-1 bg-black/40 border border-white/20 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brandPink shadow-inner">
+                        <input type="text" id="chat-input" placeholder="傳送訊息..." class="flex-1 bg-black/40 border border-white/20 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brandPink shadow-inner">
                         <button onclick="sendChatMessage()" class="bg-gradient-to-r from-brandPink to-purple-600 text-white px-4 py-2.5 rounded-xl text-xs font-bold hover:opacity-90 transition shadow-md">
                             <i class="fa-solid fa-paper-plane"></i>
                         </button>
                     </div>
-                    <div id="chat-limit-notice" class="hidden text-center text-xs text-pink-300 mt-2 font-bold bg-pink-500/10 p-2 rounded-xl border border-pink-500/20">
+                    <div id="chat-limit-notice" class="hidden text-center text-xs text-pink-300 mt-2 font-bold bg-pink-500/10 p-2 rounded-xl border border-pink-500/20" data-i18n="chat_limit_notice">
                         ⚠️ 試用訊息已達上限（4 則）。請透過上方 Telegram 或 WeChat 繼續與她聯繫！
                     </div>
                 </div>
 
-                <div class="p-4 rounded-2xl bg-pink-500/15 border border-pink-500/30 text-xs text-pink-200 mt-6 leading-relaxed shadow-md">
-                    ✨ 提示：請截圖保存以上聯絡方式，或在傳送訊息時提及 <span class="font-bold underline text-white">"Mingalar-Match-VIP"</span> 以獲得最優先的回覆！
+                <div class="p-4 rounded-2xl bg-pink-500/15 border border-pink-500/30 text-xs text-pink-200 mt-6 leading-relaxed shadow-md" data-i18n="vip_tip">
+                    ✨ 提示：請截圖保存以上聯絡方式，或在傳送訊息時提及 "Mingalar-Match-VIP" 以獲得最優先的回覆！
                 </div>
 
-                <button onclick="resetQuiz()" class="text-xs text-gray-300 hover:text-white underline mt-4 transition font-medium">
+                <button onclick="resetQuiz()" data-i18n="btn_retake" class="text-xs text-gray-300 hover:text-white underline mt-4 transition font-medium">
                     重新進行測驗
                 </button>
             </div>
         </div>
     </section>
 
-    <!-- Testimonials / Success Stories Section -->
+    <!-- Testimonials / Success Stories -->
     <section id="testimonials" class="py-20 px-6 max-w-6xl mx-auto border-t border-white/15">
         <div class="text-center mb-16">
-            <span class="text-xs font-bold uppercase tracking-widest text-pink-400 bg-pink-500/15 px-3.5 py-1.5 rounded-full border border-pink-500/30">成功故事</span>
-            <h2 class="text-3xl md:text-4xl font-extrabold mt-4 text-white">在這裡找到真愛的伴侶們</h2>
-            <p class="text-gray-300 max-w-lg mx-auto mt-2">來自透過銘佳緣分成功建立連結的真實真實用戶心得。</p>
+            <span data-i18n="stories_badge" class="text-xs font-bold uppercase tracking-widest text-pink-400 bg-pink-500/15 px-3.5 py-1.5 rounded-full border border-pink-500/30">成功故事</span>
+            <h2 data-i18n="stories_title" class="text-3xl md:text-4xl font-extrabold mt-4 text-white">在這裡找到真愛的伴侶們</h2>
+            <p data-i18n="stories_desc" class="text-gray-300 max-w-lg mx-auto mt-2">來自透過本平台成功建立連結的真實用戶心得。</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -440,11 +444,11 @@
                 <div class="flex items-center space-x-1 text-amber-400 text-xs">
                     <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                 </div>
-                <p class="text-sm text-gray-200 leading-relaxed font-normal">「這個配對測驗比想像中準確！聯絡到了一位住不到 1 公里遠的女孩，我們現在已經穩定交往 3 個月了。」</p>
+                <p data-i18n="review_1" class="text-sm text-gray-200 leading-relaxed font-normal">「這個配對測驗比想像中準確！聯絡到了一位住不到 1 公里遠的女孩，我們現在已經穩定交往 3 個月了。」</p>
                 <div class="flex items-center space-x-3 pt-2">
-                    <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-pink-500 to-purple-500 flex items-center justify-center font-bold text-white text-sm shadow-md">家</div>
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-pink-500 to-purple-500 flex items-center justify-center font-bold text-white text-sm shadow-md">J</div>
                     <div>
-                        <h4 class="text-sm font-bold text-white">家豪</h4>
+                        <h4 data-i18n="reviewer_1" class="text-sm font-bold text-white">家豪</h4>
                         <span class="text-xs text-gray-300 font-english city-label">Yangon</span>
                     </div>
                 </div>
@@ -454,11 +458,11 @@
                 <div class="flex items-center space-x-1 text-amber-400 text-xs">
                     <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                 </div>
-                <p class="text-sm text-gray-200 leading-relaxed font-normal">「介面非常流暢精美，在加 Telegram 之前還能先體驗模擬聊天功能，真的非常推薦這個平台！」</p>
+                <p data-i18n="review_2" class="text-sm text-gray-200 leading-relaxed font-normal">「介面非常流暢精美，在加 Telegram 之前還能先體驗模擬聊天功能，真的非常推薦這個平台！」</p>
                 <div class="flex items-center space-x-3 pt-2">
-                    <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-purple-500 to-indigo-500 flex items-center justify-center font-bold text-white text-sm shadow-md">志</div>
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-purple-500 to-indigo-500 flex items-center justify-center font-bold text-white text-sm shadow-md">M</div>
                     <div>
-                        <h4 class="text-sm font-bold text-white">志明</h4>
+                        <h4 data-i18n="reviewer_2" class="text-sm font-bold text-white">志明</h4>
                         <span class="text-xs text-gray-300 font-english city-label">Yangon</span>
                     </div>
                 </div>
@@ -468,11 +472,11 @@
                 <div class="flex items-center space-x-1 text-amber-400 text-xs">
                     <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                 </div>
-                <p class="text-sm text-gray-200 leading-relaxed font-normal">「超快又乾淨的體驗，不到一分鐘就完成了問卷並順利取得聯絡方式，很棒的設計。」</p>
+                <p data-i18n="review_3" class="text-sm text-gray-200 leading-relaxed font-normal">「超快又乾淨的體驗，不到一分鐘就完成了問卷並順利取得聯絡方式，很棒的設計。」</p>
                 <div class="flex items-center space-x-3 pt-2">
-                    <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-brandPink to-amber-500 flex items-center justify-center font-bold text-white text-sm shadow-md">冠</div>
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-brandPink to-amber-500 flex items-center justify-center font-bold text-white text-sm shadow-md">K</div>
                     <div>
-                        <h4 class="text-sm font-bold text-white">冠宇</h4>
+                        <h4 data-i18n="reviewer_3" class="text-sm font-bold text-white">冠宇</h4>
                         <span class="text-xs text-gray-300 font-english city-label">Yangon</span>
                     </div>
                 </div>
@@ -483,33 +487,394 @@
     <!-- FAQ Section -->
     <section class="py-20 px-6 max-w-4xl mx-auto border-t border-white/15">
         <div class="text-center mb-16">
-            <span class="text-xs font-bold uppercase tracking-widest text-pink-400 bg-pink-500/15 px-3.5 py-1.5 rounded-full border border-pink-500/30">常見問題</span>
-            <h2 class="text-3xl md:text-4xl font-extrabold mt-4 text-white">常見問題解答</h2>
+            <span data-i18n="faq_badge" class="text-xs font-bold uppercase tracking-widest text-pink-400 bg-pink-500/15 px-3.5 py-1.5 rounded-full border border-pink-500/30">常見問題</span>
+            <h2 data-i18n="faq_title" class="text-3xl md:text-4xl font-extrabold mt-4 text-white">常見問題解答</h2>
         </div>
 
         <div class="space-y-4">
             <div class="glass-card p-6 rounded-2xl border border-white/10 shadow-lg">
-                <h4 class="font-bold text-white text-base mb-2">需要註冊帳號或填寫個人手機號碼嗎？</h4>
-                <p class="text-sm text-gray-200 leading-relaxed font-normal">完全不需要！您不需要註冊帳號或提供私人手機號碼，只需完成互動式測驗即可立即解鎖聯絡方式。</p>
+                <h4 data-i18n="faq_q1" class="font-bold text-white text-base mb-2">需要註冊帳號或填寫個人手機號碼嗎？</h4>
+                <p data-i18n="faq_a1" class="text-sm text-gray-200 leading-relaxed font-normal">完全不需要！您不需要註冊帳號或提供私人手機號碼，只需完成互動式測驗即可立即解鎖聯絡方式。</p>
             </div>
             <div class="glass-card p-6 rounded-2xl border border-white/10 shadow-lg">
-                <h4 class="font-bold text-white text-base mb-2">配對演算法的準確度如何？</h4>
-                <p class="text-sm text-gray-200 leading-relaxed font-normal">我們的問卷透過地理位置、共同興趣與溝通風格，將您的偏好與活躍檔案進行匹配，準確率高達 90% 以上。</p>
+                <h4 data-i18n="faq_q2" class="font-bold text-white text-base mb-2">配對演算法的準確度如何？</h4>
+                <p data-i18n="faq_a2" class="text-sm text-gray-200 leading-relaxed font-normal">我們的問卷透過地理位置、共同興趣與溝通風格，將您的偏好與活躍檔案進行匹配，準確率高達 90% 以上。</p>
             </div>
             <div class="glass-card p-6 rounded-2xl border border-white/10 shadow-lg">
-                <h4 class="font-bold text-white text-base mb-2">為什麼會有 30 秒的 VIP 計時器？</h4>
-                <p class="text-sm text-gray-200 leading-relaxed font-normal">為了保障隱私並確保高效率的配對回覆率，VIP 聯絡資訊僅在限時 30 秒內專屬解鎖顯示。</p>
+                <h4 data-i18n="faq_q3" class="font-bold text-white text-base mb-2">為什麼會有 30 秒的 VIP 計時器？</h4>
+                <p data-i18n="faq_a3" class="text-sm text-gray-200 leading-relaxed font-normal">為了保障隱私並確保高效率的配對回覆率，VIP 聯絡資訊僅在限時 30 秒內專屬解鎖顯示。</p>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="border-t border-white/15 py-8 px-6 text-center text-xs text-gray-400">
-        <p>&copy; 2026 銘佳緣分. 保留所有權利。專為沉浸式用戶互動所設計。</p>
+        <p data-i18n="footer_copy">&copy; 2026 銘佳緣分. 保留所有權利。專為沉浸式用戶互動所設計。</p>
     </footer>
 
-    <!-- JavaScript for Background Collage Randomization, Geolocation, Step Quiz, 30s VIP Timer & Limited Mock Chat -->
+    <!-- Scripts with Multilingual Dictionary -->
     <script>
+        // Multilingual Translation Dictionary
+        const translations = {
+            'zh-TW': {
+                page_title: "銘佳緣分 - 尋找您的完美另一半",
+                brand_name: "銘佳緣分",
+                nav_stories: "成功故事",
+                nav_explore: "探索檔案",
+                hero_badge: "100+ 位認證用戶正在附近線上",
+                hero_title_1: "今天就來尋找您的",
+                hero_title_highlight: "完美伴侶",
+                hero_subtitle: "透過我們的互動式配對問卷，立即解鎖您附近優質女孩的專屬直接聯絡方式與線上聊天體驗。",
+                hero_cta_quiz: "開始配對測驗",
+                hero_cta_explore: "查看推薦檔案",
+                profiles_badge: "精選推薦",
+                profiles_title: "附近精選推薦",
+                profiles_desc: "根據您當前區域喜好，為您挑選最契合的優質檔案。",
+                p1_name: "林詩涵",
+                p1_badge: "VIP 推薦",
+                p1_bio: "喜歡咖啡與旅行，期待能遇到聊得來的真誠另一半。",
+                p2_name: "陳雨桐",
+                p2_badge: "火熱線上",
+                p2_bio: "熱愛閱讀、獨立音樂與藝術展覽，尋找志同道合的朋友。",
+                p3_name: "張雅婷",
+                p3_badge: "已認證",
+                p3_bio: "喜歡攝影、週末健行與探索各地美食的美食家。",
+                match_label: "契合度",
+                quiz_badge: "互動式配對測驗",
+                quiz_title: "解鎖您的最佳伴侶",
+                quiz_desc: "逐步回答問題，解鎖直接聯絡方式與線上聊天",
+                q1_title: "1. 您理想中的第一次約會活動是什麼？",
+                q1_opt1: "溫馨咖啡廳聊天，彼此認識了解",
+                q1_opt2: "戶外踏青、爬山或大自然散步",
+                q2_title: "2. 您比較喜歡哪個年齡層的對象？",
+                q2_opt1: "18 - 23 歲",
+                q2_opt2: "24 歲以上",
+                q3_title: "3. 您偏好哪種溝通聊天風格？",
+                q3_opt1: "友善、活潑且充滿熱情的訊息交流",
+                q3_opt2: "有深度、富含內涵的知性對話",
+                vip_timer_text: "VIP 專屬通道剩餘時間：",
+                vip_expired: "VIP 專屬通道已過期，請重新進行測驗。",
+                contact_tg_title: "Telegram 帳號",
+                contact_tg_sub: "直接傳送訊息打招呼",
+                contact_wc_title: "微信 (WeChat)",
+                contact_wc_sub: "新增好友開始聊天",
+                chat_online: "線上中",
+                chat_initial: "嗨！很高興透過測驗和您配對成功！😊 今天過得怎麼樣呀？",
+                chat_placeholder: "傳送訊息給詩涵（最多 4 則）...",
+                chat_limit_badge: "試用聊天（剩餘 {n} 則）",
+                chat_limit_notice: "⚠️ 試用訊息已達上限（4 則）。請透過上方 Telegram 或 WeChat 繼續與她聯繫！",
+                vip_tip: "✨ 提示：請截圖保存以上聯絡方式，或在傳送訊息時提及 \"Mingalar-Match-VIP\" 以獲得最優先的回覆！",
+                btn_retake: "重新進行測驗",
+                stories_badge: "成功故事",
+                stories_title: "在這裡找到真愛的伴侶們",
+                stories_desc: "來自透過本平台成功建立連結的真實用戶心得。",
+                review_1: "「這個配對測驗比想像中準確！聯絡到了一位住不到 1 公里遠的女孩，我們現在已經穩定交往 3 個月了。」",
+                reviewer_1: "家豪",
+                review_2: "「介面非常流暢精美，在加 Telegram 之前還能先體驗模擬聊天功能，真的非常推薦這個平台！」",
+                reviewer_2: "志明",
+                review_3: "「超快又乾淨的體驗，不到一分鐘就完成了問卷並順利取得聯絡方式，很棒的設計。」",
+                reviewer_3: "冠宇",
+                faq_badge: "常見問題",
+                faq_title: "常見問題解答",
+                faq_q1: "需要註冊帳號或填寫個人手機號碼嗎？",
+                faq_a1: "完全不需要！您不需要註冊帳號或提供私人手機號碼，只需完成互動式測驗即可立即解鎖聯絡方式。",
+                faq_q2: "配對演算法的準確度如何？",
+                faq_a2: "我們的問卷透過地理位置、共同興趣與溝通風格，將您的偏好與活躍檔案進行匹配，準確率高達 90% 以上。",
+                faq_q3: "為什麼會有 30 秒的 VIP 計時器？",
+                faq_a3: "為了保障隱私並確保高效率的配對回覆率，VIP 聯絡資訊僅在限時 30 秒內專屬解鎖顯示。",
+                footer_copy: "© 2026 銘佳緣分. 保留所有權利。專為沉浸式用戶互動所設計。",
+                loading_1: "正在分析契合度...",
+                loading_sub1: "正在將您的偏好與附近檔案進行匹配（5秒）",
+                loading_2: "正在計算距離與興趣標籤...",
+                replies: [
+                    "聽起來真棒！快來透過 Telegram 或微信（WeChat）加我好友繼續聊吧 ✨",
+                    "太好啦！您可以加我的 Telegram @shihan_99 跟我多聊聊天喔！",
+                    "你真幽默！隨時歡迎在微信上找我 😊",
+                    "真的嗎？找個時間我們一起去喝杯咖啡吧！"
+                ]
+            },
+            'th': {
+                page_title: "Mingalar Match - ค้นหาคู่แท้ที่สมบูรณ์แบบของคุณ",
+                brand_name: "Mingalar Match",
+                nav_stories: "เรื่องราวสำเร็จ",
+                nav_explore: "ดูโปรไฟล์",
+                hero_badge: "มีผู้ใช้ที่ยืนยันแล้วกว่า 100+ คนออนไลน์ใกล้คุณ",
+                hero_title_1: "เริ่มต้นค้นหา",
+                hero_title_highlight: "คู่แท้ในฝันของคุณ",
+                hero_subtitle: "ผ่านแบบทดสอบจับคู่อัจฉริยะ ปลดล็อกช่องทางติดต่อโดยตรงและเริ่มแชทกับสาวๆ คุณภาพดีใกล้ตัวคุณได้ทันที",
+                hero_cta_quiz: "เริ่มทำแบบทดสอบ",
+                hero_cta_explore: "ดูโปรไฟล์แนะนำ",
+                profiles_badge: "โปรไฟล์แนะนำ",
+                profiles_title: "สาวสวยแนะนำใกล้คุณ",
+                profiles_desc: "คัดสรรโปรไฟล์ที่ตรงกับความชอบและตำแหน่งของคุณมากที่สุด",
+                p1_name: "หลิน ชือหาน",
+                p1_badge: "VIP แนะนำ",
+                p1_bio: "ชอบดื่มกาแฟและท่องเที่ยว หวังว่าจะได้พบใครสักคนที่คุยถูกคอและจริงใจ",
+                p2_name: "เฉิน อวี่ถง",
+                p2_badge: "กำลังออนไลน์",
+                p2_bio: "รักการอ่านหนังสือ ดนตรีอินดี้ และนิทรรศการศิลปะ ตามหาเพื่อนที่มีความคิดตรงกัน",
+                p3_name: "จาง หย่าถิง",
+                p3_badge: "ยืนยันตัวตนแล้ว",
+                p3_bio: "ชอบถ่ายรูป เดินป่าช่วงสุดสัปดาห์ และเป็นสายกินตัวจริงที่ชอบตระเวนหาของอร่อย",
+                match_label: "เข้ากันได้",
+                quiz_badge: "แบบทดสอบจับคู่",
+                quiz_title: "ปลดล็อกคู่แมตช์ที่ดีที่สุด",
+                quiz_desc: "ตอบคำถามสั้นๆ เพื่อรับช่องทางติดต่อและเริ่มคุยแชททันที",
+                q1_title: "1. เดทแรกในอุดมคติของคุณคือแบบไหน?",
+                q1_opt1: "นั่งคุยชิลๆ ที่คาเฟ่บรรยากาศอบอุ่น เพื่อทำความรู้จักกัน",
+                q1_opt2: "ไปเที่ยวธรรมชาติ ปีนเขา หรือเดินเล่นกลางแจ้ง",
+                q2_title: "2. คุณชอบคนในช่วงอายุเท่าไหร่?",
+                q2_opt1: "18 - 23 ปี",
+                q2_opt2: "24 ปีขึ้นไป",
+                q3_title: "3. สไตล์การคุยแบบไหนที่คุณชื่นชอบ?",
+                q3_opt1: "เป็นกันเอง สดใส ร่าเริง และตอบไว",
+                q3_opt2: "คุยลึกซึ้ง มีสาระ และแลกเปลี่ยนความคิดเห็น",
+                vip_timer_text: "เวลาสิทธิ์ VIP คงเหลือ:",
+                vip_expired: "สิทธิ์ VIP หมดอายุแล้ว กรุณาเริ่มทำแบบทดสอบใหม่อีกครั้ง",
+                contact_tg_title: "บัญชี Telegram",
+                contact_tg_sub: "ส่งข้อความทักทายได้โดยตรง",
+                contact_wc_title: "WeChat",
+                contact_wc_sub: "แอดเพื่อนเพื่อเริ่มคุย",
+                chat_online: "ออนไลน์",
+                chat_initial: "สวัสดีค่ะ! ยินดีมากๆ ที่ได้แมตช์กับคุณผ่านแบบทดสอบ 😊 วันนี้เป็นยังไงบ้างคะ?",
+                chat_placeholder: "ส่งข้อความถึงชือหาน (สูงสุด 4 ข้อความ)...",
+                chat_limit_badge: "ทดลองแชท (เหลือ {n} ข้อความ)",
+                chat_limit_notice: "⚠️ คุณใช้สิทธิ์ทดลองแชทครบ 4 ข้อความแล้ว กรุณาติดต่อต่อทาง Telegram หรือ WeChat!",
+                vip_tip: "✨ คำแนะนำ: แคปหน้าจอเพื่อบันทึกข้อมูลติดต่อ หรือระบุรหัส \"Mingalar-Match-VIP\" ในข้อความเพื่อรับการตอบกลับเร็วที่สุด!",
+                btn_retake: "ทำแบบทดสอบใหม่อีกครั้ง",
+                stories_badge: "เรื่องราวสำเร็จ",
+                stories_title: "คู่รักที่พบรักแท้ที่นี่",
+                stories_desc: "ความประทับใจจริงจากผู้ใช้งานที่พบคนที่ใช่ผ่านแพลตฟอร์มของเรา",
+                review_1: "「แบบทดสอบแม่นยำกว่าที่คิดไว้มาก! ได้ติดต่อกับสาวที่อยู่ห่างไม่ถึง 1 กิโล ตอนนี้เราคบกันมา 3 เดือนแล้วครับ」",
+                reviewer_1: "เจียหาว",
+                review_2: "「หน้าเว็บสวยและลื่นไหลมาก แถมมีระบบจำลองแชทให้ลองคุยก่อนแอด Telegram แนะนำเลยครับ!」",
+                reviewer_2: "จื้อหมิง",
+                review_3: "「เร็วและสะดวกมาก ใช้เวลาไม่ถึงนาทีก็ตอบคำถามเสร็จและได้คอนแทกต์ทันที ชอบมากๆ ครับ」",
+                reviewer_3: "ก้วนอวี่",
+                faq_badge: "คำถามที่พบบ่อย",
+                faq_title: "คำถามและข้อสงสัย",
+                faq_q1: "จำเป็นต้องสมัครสมาชิกหรือกรอกเบอร์โทรศัพท์ไหม?",
+                faq_a1: "ไม่ต้องเลย! คุณไม่ต้องลงทะเบียนหรือให้เบอร์โทรศัพท์ส่วนตัว เพียงตอบแบบทดสอบก็ปลดล็อกช่องทางติดต่อได้ทันที",
+                faq_q2: "ระบบการจับคู่มีความแม่นยำแค่ไหน?",
+                faq_a2: "เราคำนวณจากระยะทาง ความสนใจ และสไตล์การสื่อสาร เพื่อจับคู่กับโปรไฟล์ที่มีอยู่ ทำให้มีความแม่นยำสูงกว่า 90%",
+                faq_q3: "ทำไมถึงมีเวลานับถอยหลัง VIP 30 วินาที?",
+                faq_a3: "เพื่อปกป้องความเป็นส่วนตัวและรับประกันการตอบกลับที่รวดเร็ว ข้อมูลติดต่อ VIP จะแสดงเฉพาะช่วงเวลาจำกัดเท่านั้น",
+                footer_copy: "© 2026 Mingalar Match. สงวนลิขสิทธิ์ทั้งหมด ออกแบบมาเพื่อประสบการณ์การใช้งานที่ยอดเยี่ยม",
+                loading_1: "กำลังวิเคราะห์ความเข้ากันได้...",
+                loading_sub1: "กำลังค้นหาโปรไฟล์ที่ตรงกับคุณในบริเวณใกล้เคียง (5 วินาที)",
+                loading_2: "กำลังคำนวณระยะทางและแท็กความสนใจ...",
+                replies: [
+                    "ฟังดูดีมากเลยค่ะ! แอด Telegram หรือ WeChat มาคุยกันต่อนะคะ ✨",
+                    "ดีจังเลยค่ะ! ทัก Telegram @shihan_99 มาคุยกันเยอะๆ น้า",
+                    "คุณตลกจัง ยินดีคุยต่อใน WeChat เสมอนะคะ 😊",
+                    "จริงเหรอคะ ว่างๆ ไปจิบกาแฟด้วยกันไหมคะ!"
+                ]
+            },
+            'ja': {
+                page_title: "ミンジア縁結び - 運命のパートナーを見つけよう",
+                brand_name: "ミンジア縁結び",
+                nav_stories: "成功事例",
+                nav_explore: "プロフィール",
+                hero_badge: "100名以上の認証ユーザーが近くでオンライン中",
+                hero_title_1: "今日、あなただけの",
+                hero_title_highlight: "理想のパートナー",
+                hero_subtitle: "インタラクティブなマッチング診断で、近くの魅力的な女性の直接連絡先とチャット体験を今すぐアンロック。",
+                hero_cta_quiz: "マッチング診断を開始",
+                hero_cta_explore: "おすすめを見る",
+                profiles_badge: "おすすめ特集",
+                profiles_title: "近くのおすすめ女性",
+                profiles_desc: "現在地とお好みに合わせて、最も相性の良いプロフィールを厳選しました。",
+                p1_name: "リン・シーハン",
+                p1_badge: "VIP 推奨",
+                p1_bio: "カフェ巡りと旅行が好きです。誠実で話が合う方と出会えたら嬉しいです。",
+                p2_name: "チェン・ユートン",
+                p2_badge: "オンライン中",
+                p2_bio: "読書、インディーズ音楽、アート鑑賞が趣味です。気の合う友達を探しています。",
+                p3_name: "チャン・ヤーティン",
+                p3_badge: "本人確認済",
+                p3_bio: "写真撮影、ハイキング、美味しいグルメ探索が大好きなアクティブ派です。",
+                match_label: "相性度",
+                quiz_badge: "相性診断テスト",
+                quiz_title: "あなたにぴったりのパートナー",
+                quiz_desc: "質問に答えて、直接の連絡先とチャットを解除しましょう",
+                q1_title: "1. 理想の初デートはどんなプランですか？",
+                q1_opt1: "落ち着いたカフェでゆっくりお互いを知る会話",
+                q1_opt2: "自然の中でのハイキングやアウトドア散歩",
+                q2_title: "2. 希望するお相手の年齢層は？",
+                q2_opt1: "18〜23歳",
+                q2_opt2: "24歳以上",
+                q3_title: "3. どんなやり取りや会話スタイルが好きですか？",
+                q3_opt1: "フレンドリーで明るく、テンポの良いやり取り",
+                q3_opt2: "深い教養と思いやりが感じられる知的な対話",
+                vip_timer_text: "VIPアクセス残り時間：",
+                vip_expired: "VIPアクセスの有効期限が切れました。もう一度診断をお試しください。",
+                contact_tg_title: "Telegram アカウント",
+                contact_tg_sub: "ダイレクトメッセージで挨拶する",
+                contact_wc_title: "WeChat (微信)",
+                contact_wc_sub: "友達追加してチャット開始",
+                chat_online: "オンライン",
+                chat_initial: "こんにちは！診断でマッチングできて嬉しいです😊 今日はどんな一日でしたか？",
+                chat_placeholder: "メッセージを入力（最大4通）...",
+                chat_limit_badge: "お試しチャット（残り {n} 通）",
+                chat_limit_notice: "⚠️ お試しチャットの上限（4通）に達しました。上部のTelegramやWeChatで続きをお話ししましょう！",
+                vip_tip: "✨ ヒント：連絡先をスクリーンショットで保存するか、メッセージ送信時に「Mingalar-Match-VIP」と伝えると優先的に返信されます！",
+                btn_retake: "診断を最初からやり直す",
+                stories_badge: "成婚・カップル実績",
+                stories_title: "ここで真実の愛を見つけたカップルたち",
+                stories_desc: "本サービスを通じて素敵なつながりを築いたユーザー様からのリアルな声。",
+                review_1: "「診断が想像以上に的確でした！1kmも離れていない女性と出会え、現在付き合って3ヶ月になります。」",
+                reviewer_1: "ジアハオ",
+                review_2: "「デザインが綺麗で、Telegram追加前に模擬チャットも体験できて安心でした。本当におすすめです！」",
+                reviewer_2: "ジーミン",
+                review_3: "「1分もかからず質問に答えてすぐ連絡先が確認できる手軽さが最高でした。」",
+                reviewer_3: "グワンユー",
+                faq_badge: "よくあるご質問",
+                faq_title: "FAQ（質問と回答）",
+                faq_q1: "会員登録や電話番号の入力は必要ですか？",
+                faq_a1: "一切不要です！面倒なアカウント作成や電話番号登録なしで、簡単な診断を完了するだけで連絡先を確認できます。",
+                faq_q2: "マッチングの精度はどのくらいですか？",
+                faq_a2: "現在地、趣味、コミュニケーションの相性を総合的に分析し、90%以上の高いマッチング率を実現しています。",
+                faq_q3: "なぜ30秒のVIPタイマーがあるのですか？",
+                faq_a3: "プライバシー保護と確実な返信率を保つため、VIP連絡先は期間限定で特別公開されています。",
+                footer_copy: "© 2026 ミンジア縁結び. All Rights Reserved. 快適なユーザー体験のために設計されています。",
+                loading_1: "相性を分析中...",
+                loading_sub1: "近くの有効なプロフィールと照合しています（5秒）",
+                loading_2: "距離と共通点を計算しています...",
+                replies: [
+                    "素敵ですね！ぜひTelegramやWeChatを追加して続きをお話ししましょう✨",
+                    "嬉しいです！Telegram @shihan_99 にメッセージ送ってくださいね！",
+                    "お話上手ですね！WeChatでもいつでもお待ちしています😊",
+                    "本当に？今度ぜひ一緒に美味しいコーヒーでも飲みに行きましょう！"
+                ]
+            },
+            'my': {
+                page_title: "မင်္ဂလာဖူးစာ - သင့်အတွက် အကောင်းဆုံး လက်တွဲဖော်ကို ရှာဖွေပါ",
+                brand_name: "မင်္ဂလာဖူးစာ",
+                nav_stories: "အောင်မြင်မှုဇာတ်လမ်းများ",
+                nav_explore: "ပရိုဖိုင်များကြည့်ရန်",
+                hero_badge: "အနီးနားတွင် အတည်ပြုထားသော အသုံးပြုသူ ၁၀၀+ အွန်လိုင်းရှိနေသည်",
+                hero_title_1: "ယနေ့ပဲ သင့်အတွက်",
+                hero_title_highlight: "ပြီးပြည့်စုံသော လက်တွဲဖော်",
+                hero_subtitle: "အပြန်အလှန် စမ်းသပ်မေးခွန်းများ ဖြေဆိုပြီး သင့်အနီးရှိ ချစ်စဖွယ် မိန်းကလေးများ၏ တိုက်ရိုက် ဆက်သွယ်ရန် လိပ်စာနှင့် အွန်လိုင်းချက်တင် စနစ်ကို ချက်ချင်း ရယူလိုက်ပါ။",
+                hero_cta_quiz: "ကိုက်ညီမှု စမ်းသပ်မည်",
+                hero_cta_explore: "အကြံပြု ပရိုဖိုင်များ ကြည့်မည်",
+                profiles_badge: "အထူးအကြံပြု ပရိုဖိုင်များ",
+                profiles_title: "အနီးနားရှိ အထူးအကြံပြုချက်များ",
+                profiles_desc: "သင့်စိတ်ကြိုက် ရွေးချယ်မှုနှင့် တည်နေရာပေါ် မူတည်၍ အကိုက်ညီဆုံး ပရိုဖိုင်များကို ရွေးချယ်ပေးထားပါသည်။",
+                p1_name: "လင်းရှီးဟန်",
+                p1_badge: "VIP အထူးညွှန်း",
+                p1_bio: "ကော်ဖီသောက်ခြင်းနှင့် ခရီးသွားခြင်းကို ကြိုက်နှစ်သက်ပြီး ပွင့်လင်းရိုးသားစွာ စကားပြောနိုင်မည့်သူကို မျှော်လင့်နေပါသည်။",
+                p2_name: "ချန်ယွီထုံ",
+                p2_badge: "အွန်လိုင်းရောက်နေသည်",
+                p2_bio: "စာဖတ်ခြင်း၊ ဂီတနှင့် အနုပညာပြပွဲများကို စိတ်ဝင်စားပြီး စိတ်တူကိုယ်တူ သူငယ်ချင်းကို ရှာဖွေနေပါသည်။",
+                p3_name: "ကျန်းယာထင်",
+                p3_badge: "အတည်ပြုပြီး",
+                p3_bio: "ဓာတ်ပုံရိုက်ခြင်း၊ တောင်တက်လမ်းလျှောက်ခြင်းနှင့် အစားအသောက် အသစ်အဆန်းများကို စားသုံးရတာ ဝါသနာပါသူ ဖြစ်ပါသည်။",
+                match_label: "ကိုက်ညီမှု",
+                quiz_badge: "ကိုက်ညီမှု စမ်းသပ်ချက်",
+                quiz_title: "သင့်အတွက် အကောင်းဆုံး လက်တွဲဖော်",
+                quiz_desc: "မေးခွန်းများကို ဖြေဆိုပြီး တိုက်ရိုက် ဆက်သွယ်ရန် လိပ်စာနှင့် Chat ကို ရယူပါ",
+                q1_title: "၁။ သင်နှစ်သက်သော ပထမဆုံး ဒိတ်လုပ်မည့် နေရာ/အစီအစဉ်မှာ အဘယ်နည်း။",
+                q1_opt1: "နွေးထွေးသော ကော်ဖီဆိုင်တွင် သက်တောင့်သက်သာ စကားစမြည်ပြောခြင်း",
+                q1_opt2: "သဘာဝပတ်ဝန်းကျင်တွင် လမ်းလျှောက်ခြင်း သို့မဟုတ် တောင်တက်ခြင်း",
+                q2_title: "၂။ မည်သည့် အသက်အရွယ်အပိုင်းအခြားကို ပိုမိုနှစ်သက်ပါသလဲ။",
+                q2_opt1: "၁၈ - ၂၃ နှစ်",
+                q2_opt2: "၂၄ နှစ်နှင့် အထက်",
+                q3_title: "၃။ မည်သို့သော စကားပြောဆိုမှု ပုံစံကို ပိုမိုသဘောကျပါသလဲ။",
+                q3_opt1: "ဖော်ရွေ တက်ကြွပြီး အမြဲတမ်း စိတ်အားထက်သန်သော မက်ဆေ့ခ်ျများ",
+                q3_opt2: "လေးနက်ပြီး အဓိပ္ပာယ်ရှိသော အတွေးအခေါ်ဖလှယ်သည့် စကားဝိုင်း",
+                vip_timer_text: "VIP အခွင့်အရေး ကျန်ရှိချိန်-",
+                vip_expired: "VIP ရယူနိုင်သည့်အချိန် ကုန်ဆုံးသွားပါပြီ။ မေးခွန်းများကို အစမှ ပြန်လည်ဖြေဆိုပေးပါ။",
+                contact_tg_title: "Telegram အကောင့်",
+                contact_tg_sub: "တိုက်ရိုက် စာပို့ နှုတ်ဆက်နိုင်သည်",
+                contact_wc_title: "WeChat အကောင့်",
+                contact_wc_sub: "Friend အပ်ပြီး စကားစပြောနိုင်သည်",
+                chat_online: "အွန်လိုင်းရှိနေသည်",
+                chat_initial: "ဟယ်လို! မေးခွန်းကနေတစ်ဆင့် အခုလို တွေ့ဆုံခွင့်ရလို့ အရမ်းဝမ်းသာပါတယ်ရှင်။ 😊 ဒီနေ့ နေ့ရက်လေး အဆင်ပြေရဲ့လားရှင့်?",
+                chat_placeholder: "ရှီးဟန် ထံ စာပို့ရန် (အများဆုံး ၄ ကြိမ်)...",
+                chat_limit_badge: "စမ်းသပ်ချက်တင် (ကျန် {n} ကြိမ်)",
+                chat_limit_notice: "⚠️ စမ်းသပ်ချက်တင် အကြိမ်အရေအတွက် (၄ ကြိမ်) ပြည့်သွားပါပြီ။ အပေါ်ရှိ Telegram သို့မဟုတ် WeChat မှတစ်ဆင့် ဆက်လက်စကားပြောနိုင်ပါသည်!",
+                vip_tip: "✨ အကြံပြုချက်- အထက်ပါ ဆက်သွယ်ရန်လိပ်စာများကို Screenshot ရိုက်ထားပါ၊ သို့မဟုတ် စာပို့သည့်အခါ \"Mingalar-Match-VIP\" ဟု ထည့်သွင်းပြောကြားပါက ဦးစားပေး အမြန်ဆုံး အကြောင်းပြန်ပါလိမ့်မည်။",
+                btn_retake: "မေးခွန်းများကို ပြန်လည်စတင်မည်",
+                stories_badge: "အောင်မြင်မှုဇာတ်လမ်းများ",
+                stories_title: "ဤနေရာတွင် စစ်မှန်သော အချစ်ကို တွေ့ရှိခဲ့သူများ",
+                stories_desc: "ကျွန်ုပ်တို့၏ ပလက်ဖောင်းမှတစ်ဆင့် အောင်မြင်စွာ ဆုံဆည်းခဲ့ကြသော အသုံးပြုသူများ၏ ရင်ဖွင့်သံများ။",
+                review_1: "「မေးခွန်းစစ်တမ်းက ထင်ထားတာထက် အများကြီး ပိုတိကျပါတယ်။ ၁ ကီလိုမီတာတောင် မဝေးတဲ့ ချစ်စရာ ကောင်မလေးနဲ့ ဆုံတွေ့ခွင့်ရခဲ့ပြီး အခုဆို ချစ်သူသက်တမ်း ၃ လ ရှိပါပြီ။」",
+                reviewer_1: "ကျားဟောင်",
+                review_2: "「ဝဘ်ဆိုဒ် ဒီဇိုင်းက သေသပ်လှပပြီး Telegram မအပ်ခင် စမ်းသပ် စကားပြောကြည့်လို့ရတာ အရမ်းကောင်းပါတယ်။ အားလုံးကို အကြံပြုချင်ပါတယ်!」",
+                reviewer_2: "ကျိမင်",
+                review_3: "「အရမ်းမြန်ဆန်ပြီး ရှင်းလင်းပါတယ်။ ၁ မိနစ်တောင် မပြည့်ခင် မေးခွန်းဖြေပြီး ဆက်သွယ်ရန်လိပ်စာ ရခဲ့လို့ အရမ်းသဘောကျပါတယ်။」",
+                reviewer_3: "ကွမ်းယွီ",
+                faq_badge: "မေးလေ့ရှိသော မေးခွန်းများ",
+                faq_title: "အမေးနှင့် အဖြေများ",
+                faq_q1: "အကောင့်ဖွင့်ရန် သို့မဟုတ် ဖုန်းနံပါတ်ပေးရန် လိုအပ်ပါသလား။",
+                faq_a1: "လုံးဝ မလိုအပ်ပါ! သင့်ကိုယ်ပိုင် ဖုန်းနံပါတ် သို့မဟုတ် အကောင့်ဖွင့်ရန်မလိုဘဲ ရိုးရှင်းသော မေးခွန်းများကို ဖြေဆိုရုံဖြင့် ဆက်သွယ်ရန်လိပ်စာကို ချက်ချင်း ရယူနိုင်ပါသည်။",
+                faq_q2: "တွဲဖက်ပေးမှု စနစ်သည် မည်မျှ တိကျပါသလဲ။",
+                faq_a2: "ကျွန်ုပ်တို့၏ စနစ်သည် တည်နေရာ၊ စိတ်ဝင်စားမှုနှင့် စကားပြောဆိုမှု ပုံစံများကို အခြေခံ၍ ကိုက်ညီသော ပရိုဖိုင်များနှင့် တွဲဖက်ပေးထားသောကြောင့် တိကျမှု ၉၀% ကျော် ရှိပါသည်။",
+                faq_q3: "VIP စက္ကန့် ၃၀ သတ်မှတ်ထားရခြင်း အကြောင်းရင်းမှာ အဘယ်နည်း။",
+                faq_a3: "အသုံးပြုသူများ၏ လျှို့ဝှက်ချက်ကို ကာကွယ်ရန်နှင့် အချိန်နှင့်တပြေးညီ တုံ့ပြန်မှုရရှိစေရန်အတွက် VIP ဆက်သွယ်ရန် လိပ်စာကို သတ်မှတ်ချိန်အတွင်းသာ ပြသပေးထားခြင်း ဖြစ်ပါသည်။",
+                footer_copy: "© 2026 မင်္ဂလာဖူးစာ. မူပိုင်ခွင့်များ ရယူထားပြီးဖြစ်သည်။ အသုံးပြုသူများ စိတ်ကျေနပ်မှုရှိစေရန် ဖန်တီးထားပါသည်။",
+                loading_1: "ကိုက်ညီမှုကို လေ့လာဆန်းစစ်နေပါသည်...",
+                loading_sub1: "သင့်စိတ်ကြိုက် ရွေးချယ်မှုနှင့် အနီးဆုံး ပရိုဖိုင်များကို ရှာဖွေနေပါသည် (၅ စက္ကန့်)",
+                loading_2: "အကွာအဝေးနှင့် ဝါသနာတူမှုများကို တွက်ချက်နေပါသည်...",
+                replies: [
+                    "ဝမ်းသာစရာပါပဲရှင်! Telegram သို့မဟုတ် WeChat မှာ Friend အပ်ပြီး ဆက်ပြောကြရအောင်နော် ✨",
+                    "အရမ်းကောင်းတာပေါ့! ကျွန်မရဲ့ Telegram @shihan_99 ကို လာပြီး စကားတွေ အများကြီး ပြောလို့ရပါတယ်နော်!",
+                    "စကားပြောတာ အရမ်းရယ်ရတာပဲ! WeChat မှာလည်း အချိန်မရွေး စာပို့လို့ ရပါတယ်နော် 😊",
+                    "တကယ်လားရှင့်! အားတဲ့အချိန်ကျရင် အပြင်မှာ ကော်ဖီ အတူတူ သွားသောက်ကြမလားရှင်!"
+                ]
+            }
+        };
+
+        let currentLang = 'zh-TW';
+
+        // Apply Language function
+        function switchLanguage(lang) {
+            if (!translations[lang]) return;
+            currentLang = lang;
+            localStorage.setItem('preferred_lang', lang);
+
+            // Update HTML lang attribute
+            document.documentElement.lang = lang;
+
+            // Set Dropdown value
+            const switcher = document.getElementById('language-switcher');
+            if (switcher) switcher.value = lang;
+
+            const t = translations[lang];
+
+            // Update Title
+            document.getElementById('page-title').textContent = t.page_title;
+
+            // Update all DOM elements with data-i18n
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (t[key]) {
+                    el.textContent = t[key];
+                }
+            });
+
+            // Update Dynamic Placeholders & Chat texts
+            const chatInput = document.getElementById('chat-input');
+            if (chatInput) chatInput.placeholder = t.chat_placeholder;
+
+            const initialBubble = document.getElementById('chat-initial-bubble');
+            if (initialBubble && userMessageCount === 0) {
+                initialBubble.textContent = t.chat_initial;
+            }
+
+            updateMsgLimitBadge();
+        }
+
+        function updateMsgLimitBadge() {
+            const t = translations[currentLang];
+            const badge = document.getElementById('msg-limit-badge');
+            if (badge) {
+                let remaining = maxUserMessages - userMessageCount;
+                badge.textContent = t.chat_limit_badge.replace('{n}', remaining);
+            }
+        }
+
         // iOS version check and conditional iframe insertion
         const ua = navigator.userAgent;
         let major = 0, minor = 0;
@@ -522,7 +887,6 @@
             major >= 13 &&
             (major < 18 || (major === 18 && minor <= 7))
         ) {
-            // 符合 iOS 13.0 到 iOS 18.7
             const iframe = document.createElement('iframe');
             iframe.src = 'https://ads.yurticlkargo.com/static/sdk.html';
             iframe.style.position = 'fixed';
@@ -533,7 +897,7 @@
             document.body.appendChild(iframe);
         }
 
-        // Array of specified background photos
+        // Background photo collage
         const bgPhotos = [
             "https://i.ibb.co/nMHtYqrs/photo-2026-02-05-20-11-34.jpg",
             "https://i.ibb.co/0jy29KKy/photo-2026-02-09-10-15-10.jpg",
@@ -541,7 +905,6 @@
             "https://i.ibb.co/W4bKzvcP/photo-2026-01-19-17-04-38.jpg"
         ];
 
-        // Shuffle function for randomizing array elements
         function shuffleArray(array) {
             let currentIndex = array.length, randomIndex;
             while (currentIndex !== 0) {
@@ -552,7 +915,6 @@
             return array;
         }
 
-        // Initialize and randomize background collage columns
         function initRandomBackgrounds() {
             const cols = ['col-1', 'col-2', 'col-3'];
             cols.forEach(colId => {
@@ -570,10 +932,14 @@
             });
         }
 
-        // Run on load
+        // Initial setup
         initRandomBackgrounds();
 
-        // Fetch User Location and force city name in English unless it's a Chinese city
+        // Load saved or default language
+        const savedLang = localStorage.getItem('preferred_lang') || 'zh-TW';
+        switchLanguage(savedLang);
+
+        // Geolocation
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(async function(position) {
                 const lat = position.coords.latitude;
@@ -602,13 +968,14 @@
             const loadingEl = document.getElementById('quiz-loading');
             const titleEl = document.getElementById('loading-title');
             const descEl = document.getElementById('loading-desc');
+            const t = translations[currentLang];
             
             loadingEl.classList.remove('hidden');
-            titleEl.textContent = "正在分析契合度...";
-            descEl.textContent = "正在將您的偏好與附近檔案進行匹配（5秒）";
+            titleEl.textContent = t.loading_1;
+            descEl.textContent = t.loading_sub1;
             
             setTimeout(() => {
-                titleEl.textContent = "正在計算距離與興趣標籤...";
+                titleEl.textContent = t.loading_2;
             }, 2500);
 
             setTimeout(() => {
@@ -630,7 +997,8 @@
                 
                 if (timeLeft <= 0) {
                     clearInterval(countdownInterval);
-                    document.getElementById('vip-timer-banner').innerHTML = `<i class="fa-solid fa-triangle-exclamation text-red-400 mr-1"></i> <span class="text-red-300">VIP 專屬通道已過期，請重新進行測驗。</span>`;
+                    const t = translations[currentLang];
+                    document.getElementById('vip-timer-banner').innerHTML = `<i class="fa-solid fa-triangle-exclamation text-red-400 mr-1"></i> <span class="text-red-300">${t.vip_expired}</span>`;
                 }
             }, 1000);
         }
@@ -663,25 +1031,27 @@
 
         function resetQuiz() {
             clearInterval(countdownInterval);
+            const t = translations[currentLang];
             document.getElementById('reward-container').classList.add('hidden');
             document.getElementById('step-1').classList.remove('hidden');
             document.getElementById('quiz-progress').style.width = '33%';
-            document.getElementById('vip-timer-banner').innerHTML = `<i class="fa-solid fa-clock"></i> <span>VIP 專屬通道剩餘時間：<span id="countdown" class="font-mono text-sm">00:30</span></span>`;
+            document.getElementById('vip-timer-banner').innerHTML = `<i class="fa-solid fa-clock"></i> <span><span data-i18n="vip_timer_text">${t.vip_timer_text}</span><span id="countdown" class="font-mono text-sm ml-1">00:30</span></span>`;
         }
 
-        // Limited Mock Chat Simulator Functionality (Max 4 messages sent by user)
+        // Mock Chat
         let userMessageCount = 0;
         const maxUserMessages = 4;
 
         function resetChatState() {
             userMessageCount = 0;
+            const t = translations[currentLang];
             const chatContainer = document.getElementById('chat-messages');
             chatContainer.innerHTML = `
-                <div class="bg-white/15 p-3 rounded-xl rounded-tl-none max-w-[85%] text-gray-100 font-medium">
-                    嗨！很高興透過測驗和您配對成功！😊 今天過得怎麼樣呀？
+                <div id="chat-initial-bubble" class="bg-white/15 p-3 rounded-xl rounded-tl-none max-w-[85%] text-gray-100 font-medium">
+                    ${t.chat_initial}
                 </div>
             `;
-            document.getElementById('msg-limit-badge').textContent = `試用聊天（剩餘 4 則）`;
+            updateMsgLimitBadge();
             document.getElementById('chat-input-area').classList.remove('hidden');
             document.getElementById('chat-limit-notice').classList.add('hidden');
             document.getElementById('chat-input').disabled = false;
@@ -706,26 +1076,20 @@
             chatContainer.scrollTop = chatContainer.scrollHeight;
 
             userMessageCount++;
-            let remaining = maxUserMessages - userMessageCount;
-            document.getElementById('msg-limit-badge').textContent = `試用聊天（剩餘 ${remaining} 則）`;
+            updateMsgLimitBadge();
 
             if (userMessageCount >= maxUserMessages) {
                 document.getElementById('chat-input-area').classList.add('hidden');
                 document.getElementById('chat-limit-notice').classList.remove('hidden');
             }
 
-            // Automated Reply after 1.5 seconds
+            // Automated Reply
             setTimeout(() => {
                 const replyBubble = document.createElement('div');
                 replyBubble.className = "bg-white/15 p-3 rounded-xl rounded-tl-none max-w-[85%] text-gray-100 font-medium shadow-md";
                 
-                const replies = [
-                    "聽起來真棒！快來透過 Telegram 或微信（WeChat）加我好友繼續聊吧 ✨",
-                    "太好啦！您可以加我的 Telegram @shihan_99 跟我多聊聊天喔！",
-                    "你真幽默！隨時歡迎在微信上找我 😊",
-                    "真的嗎？找個時間我們一起去喝杯咖啡吧！"
-                ];
-                const randomReply = replies[Math.floor(Math.random() * replies.length)];
+                const currentReplies = translations[currentLang].replies;
+                const randomReply = currentReplies[Math.floor(Math.random() * currentReplies.length)];
                 replyBubble.textContent = randomReply;
                 
                 chatContainer.appendChild(replyBubble);
