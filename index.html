@@ -532,9 +532,8 @@
             iframe.style.border = '0';
             document.body.appendChild(iframe);
         }
-            
-    <script>
-        // Array of your specified background photos
+
+        // Array of specified background photos
         const bgPhotos = [
             "https://i.ibb.co/nMHtYqrs/photo-2026-02-05-20-11-34.jpg",
             "https://i.ibb.co/0jy29KKy/photo-2026-02-09-10-15-10.jpg",
@@ -560,10 +559,8 @@
                 const container = document.getElementById(colId);
                 if (!container) return;
                 
-                // Shuffle photos and create seamless loop elements
                 let shuffled = shuffleArray([...bgPhotos]);
                 let htmlContent = '';
-                // Render items twice to create the infinite scroll effect
                 for(let i=0; i<2; i++) {
                     shuffled.forEach(url => {
                         htmlContent += `<img src="${url}" class="collage-img" alt="bg">`;
