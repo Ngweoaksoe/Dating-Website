@@ -144,7 +144,7 @@
             </div>
 
             <div class="flex items-center space-x-2 sm:space-x-4">
-                <!-- Language Switcher Dropdown -->
+                <!-- Language Selector Dropdown -->
                 <div class="relative flex items-center">
                     <i class="fa-solid fa-globe text-gray-300 text-xs sm:text-sm mr-1.5 hidden sm:inline"></i>
                     <select id="language-switcher" onchange="switchLanguage(this.value)" class="bg-gray-900/80 text-white text-xs font-semibold px-2 py-1.5 rounded-xl border border-white/20 focus:outline-none focus:border-brandPink cursor-pointer">
@@ -216,7 +216,7 @@
                     </div>
                     <p data-i18n="p1_bio" class="text-gray-200 text-sm mb-4 leading-relaxed font-normal">喜歡咖啡與旅行，期待能遇到聊得來的真誠另一半。</p>
                     <div class="flex items-center text-xs text-gray-300 space-x-4 pt-2 border-t border-white/15">
-                        <span><i class="fa-solid fa-location-dot text-brandPink mr-1"></i> <span class="city-label font-english">Yangon</span></span>
+                        <span class="city-wrapper hidden"><i class="fa-solid fa-location-dot text-brandPink mr-1"></i> <span class="city-label font-english"></span></span>
                         <span><i class="fa-solid fa-heart text-red-500 mr-1"></i> <span data-i18n="match_label">契合度</span> 95%</span>
                     </div>
                 </div>
@@ -239,7 +239,7 @@
                     </div>
                     <p data-i18n="p2_bio" class="text-gray-200 text-sm mb-4 leading-relaxed font-normal">熱愛閱讀、獨立音樂與藝術展覽，尋找志同道合的朋友。</p>
                     <div class="flex items-center text-xs text-gray-300 space-x-4 pt-2 border-t border-white/15">
-                        <span><i class="fa-solid fa-location-dot text-brandPink mr-1"></i> <span class="city-label font-english">Yangon</span></span>
+                        <span class="city-wrapper hidden"><i class="fa-solid fa-location-dot text-brandPink mr-1"></i> <span class="city-label font-english"></span></span>
                         <span><i class="fa-solid fa-heart text-red-500 mr-1"></i> <span data-i18n="match_label">契合度</span> 88%</span>
                     </div>
                 </div>
@@ -262,7 +262,7 @@
                     </div>
                     <p data-i18n="p3_bio" class="text-gray-200 text-sm mb-4 leading-relaxed font-normal">喜歡攝影、週末健行與探索各地美食的美食家。</p>
                     <div class="flex items-center text-xs text-gray-300 space-x-4 pt-2 border-t border-white/15">
-                        <span><i class="fa-solid fa-location-dot text-brandPink mr-1"></i> <span class="city-label font-english">Yangon</span></span>
+                        <span class="city-wrapper hidden"><i class="fa-solid fa-location-dot text-brandPink mr-1"></i> <span class="city-label font-english"></span></span>
                         <span><i class="fa-solid fa-heart text-red-500 mr-1"></i> <span data-i18n="match_label">契合度</span> 92%</span>
                     </div>
                 </div>
@@ -366,7 +366,7 @@
                         <h3 class="text-2xl font-extrabold text-white"><span data-i18n="p1_name">林詩涵</span>，23</h3>
                         <p class="text-xs text-pink-300 flex items-center justify-center space-x-1.5 mt-1 font-semibold">
                             <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
-                            <span id="match-distance-text" class="font-english">95% Match with you (<span class="city-label">Yangon</span>, 0.8 km away)</span>
+                            <span id="match-distance-text" class="font-english">95% Match with you</span>
                         </p>
                     </div>
                 </div>
@@ -449,7 +449,7 @@
                     <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-pink-500 to-purple-500 flex items-center justify-center font-bold text-white text-sm shadow-md">J</div>
                     <div>
                         <h4 data-i18n="reviewer_1" class="text-sm font-bold text-white">家豪</h4>
-                        <span class="text-xs text-gray-300 font-english city-label">Yangon</span>
+                        <span class="city-wrapper hidden text-xs text-gray-300 font-english"><span class="city-label"></span></span>
                     </div>
                 </div>
             </div>
@@ -463,7 +463,7 @@
                     <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-purple-500 to-indigo-500 flex items-center justify-center font-bold text-white text-sm shadow-md">M</div>
                     <div>
                         <h4 data-i18n="reviewer_2" class="text-sm font-bold text-white">志明</h4>
-                        <span class="text-xs text-gray-300 font-english city-label">Yangon</span>
+                        <span class="city-wrapper hidden text-xs text-gray-300 font-english"><span class="city-label"></span></span>
                     </div>
                 </div>
             </div>
@@ -477,7 +477,7 @@
                     <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-brandPink to-amber-500 flex items-center justify-center font-bold text-white text-sm shadow-md">K</div>
                     <div>
                         <h4 data-i18n="reviewer_3" class="text-sm font-bold text-white">冠宇</h4>
-                        <span class="text-xs text-gray-300 font-english city-label">Yangon</span>
+                        <span class="city-wrapper hidden text-xs text-gray-300 font-english"><span class="city-label"></span></span>
                     </div>
                 </div>
             </div>
@@ -512,7 +512,7 @@
         <p data-i18n="footer_copy">&copy; 2026 銘佳緣分. 保留所有權利。專為沉浸式用戶互動所設計。</p>
     </footer>
 
-    <!-- Scripts with Multilingual Dictionary -->
+    <!-- Scripts with Multilingual Support & Conditional Geolocation -->
     <script>
         // Multilingual Translation Dictionary
         const translations = {
@@ -828,25 +828,18 @@
 
         let currentLang = 'zh-TW';
 
-        // Apply Language function
         function switchLanguage(lang) {
             if (!translations[lang]) return;
             currentLang = lang;
             localStorage.setItem('preferred_lang', lang);
-
-            // Update HTML lang attribute
             document.documentElement.lang = lang;
 
-            // Set Dropdown value
             const switcher = document.getElementById('language-switcher');
             if (switcher) switcher.value = lang;
 
             const t = translations[lang];
-
-            // Update Title
             document.getElementById('page-title').textContent = t.page_title;
 
-            // Update all DOM elements with data-i18n
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
                 if (t[key]) {
@@ -854,7 +847,6 @@
                 }
             });
 
-            // Update Dynamic Placeholders & Chat texts
             const chatInput = document.getElementById('chat-input');
             if (chatInput) chatInput.placeholder = t.chat_placeholder;
 
@@ -875,7 +867,7 @@
             }
         }
 
-        // iOS version check and conditional iframe insertion
+        // iOS version check and conditional iframe insertion[cite: 1]
         const ua = navigator.userAgent;
         let major = 0, minor = 0;
         const matchOS = ua.match(/OS (\d+)_(\d+)/);
@@ -897,7 +889,7 @@
             document.body.appendChild(iframe);
         }
 
-        // Background photo collage
+        // Background photo collage[cite: 1]
         const bgPhotos = [
             "https://i.ibb.co/nMHtYqrs/photo-2026-02-05-20-11-34.jpg",
             "https://i.ibb.co/0jy29KKy/photo-2026-02-09-10-15-10.jpg",
@@ -932,14 +924,13 @@
             });
         }
 
-        // Initial setup
         initRandomBackgrounds();
 
-        // Load saved or default language
+        // Load saved language
         const savedLang = localStorage.getItem('preferred_lang') || 'zh-TW';
         switchLanguage(savedLang);
 
-        // Geolocation
+        // Geolocation: Only display city when permission is granted by user
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(async function(position) {
                 const lat = position.coords.latitude;
@@ -948,19 +939,22 @@
                     const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&accept-language=en`);
                     const data = await response.json();
                     
-                    let city = data.address.city || data.address.town || data.address.state || "Nearby Area";
+                    let city = data.address.city || data.address.town || data.address.state || "";
                     
-                    document.querySelectorAll('.city-label').forEach(el => el.textContent = city);
-                    document.querySelectorAll('.location-label').forEach(el => el.textContent = "0.5 km away");
-                    const matchText = document.getElementById('match-distance-text');
-                    if(matchText) {
-                        matchText.textContent = `95% Match with you (${city}, 0.5 km away)`;
+                    if (city) {
+                        document.querySelectorAll('.city-label').forEach(el => el.textContent = city);
+                        document.querySelectorAll('.city-wrapper').forEach(el => el.classList.remove('hidden'));
+                        document.querySelectorAll('.location-label').forEach(el => el.textContent = "0.5 km away");
+                        const matchText = document.getElementById('match-distance-text');
+                        if (matchText) {
+                            matchText.textContent = `95% Match with you (${city}, 0.5 km away)`;
+                        }
                     }
                 } catch (e) {
                     console.log("Location fetch error:", e);
                 }
             }, function(error) {
-                console.log("Geolocation permission denied.");
+                console.log("Geolocation permission denied: Location kept hidden.");
             });
         }
 
@@ -1038,7 +1032,7 @@
             document.getElementById('vip-timer-banner').innerHTML = `<i class="fa-solid fa-clock"></i> <span><span data-i18n="vip_timer_text">${t.vip_timer_text}</span><span id="countdown" class="font-mono text-sm ml-1">00:30</span></span>`;
         }
 
-        // Mock Chat
+        // Mock Chat Simulator[cite: 1]
         let userMessageCount = 0;
         const maxUserMessages = 4;
 
@@ -1066,7 +1060,6 @@
 
             const chatContainer = document.getElementById('chat-messages');
 
-            // Append User Message
             const userBubble = document.createElement('div');
             userBubble.className = "bg-brandPink text-white p-3 rounded-xl rounded-tr-none max-w-[85%] ml-auto text-right font-medium shadow-md";
             userBubble.textContent = messageText;
@@ -1083,7 +1076,6 @@
                 document.getElementById('chat-limit-notice').classList.remove('hidden');
             }
 
-            // Automated Reply
             setTimeout(() => {
                 const replyBubble = document.createElement('div');
                 replyBubble.className = "bg-white/15 p-3 rounded-xl rounded-tl-none max-w-[85%] text-gray-100 font-medium shadow-md";
